@@ -30,6 +30,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { LucideStar } from "lucide-react"
+import {useRouter} from "next/navigation";
 
 export function NavUser({
   user,
@@ -43,8 +44,13 @@ export function NavUser({
     avatar: string
   }
 }) {
+  const router = useRouter();
   const { isMobile } = useSidebar()
-
+  
+  const handleLogout = async () => {
+    await fetch("http://localhost:3000/api/users/logout", { method: "POST", credentials:"include" }); 
+    router.push("/login"); 
+  };
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -112,7 +118,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onSelect={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>
