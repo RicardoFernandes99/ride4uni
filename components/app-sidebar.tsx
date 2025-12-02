@@ -20,6 +20,12 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
+const id = await fetch("http://localhost:3000/api/users/userid", {
+  method: "GET",
+  credentials: "include",
+  headers: {"Content-Type": "application/json"}
+});
+
 // This is sample data.
 const data = {
   user: {
